@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html' %}
+
+
+{% block content %}
+    <error_b>
+        <div class="error-container">
+            <div class="error-text">
+                Something went wrong. Check your internet connection
+            </div>
+            <br>
+            <br>
+            <a href="{{ url_for('index') }}" class="error-text" style="color: darkcyan;">Go back</a>
+        </div>
+    </error_b>
+{% endblock content %}

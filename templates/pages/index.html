@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <h1>Currency Converter</h1>
+        <form action="converter" method="post">
+            <div class="input-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" placeholder="Enter amount" min="0" step="0.01" value="{{ context.amount }}" required>
+            </div>
+            <div class="input-group">
+                <label for="fromCurrency">From:</label>
+                <select id="fromCurrency" name="fromCurrency" >
+                    {% if context.fromCurrency %}
+                        <option value="{{ context.fromCurrency }}">{{ context.fromCurrency }}</option>
+                    {% else %}
+                        <option>Choose currency</option>
+                    {% endif %}
+                    {% for currency in context.currencies %}
+                        <option value="{{ currency }}">{{ currency }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="toCurrency">To:</label>
+                <select id="toCurrency" name="toCurrency">
+                    {% if context.toCurrency %}
+                        <option value="{{ context.toCurrency }}">{{ context.toCurrency }}</option>
+                    {% else %}
+                        <option>Choose currency</option>
+                    {% endif %}
+                    {% for currency in context.currencies %}
+                        <option value="{{ currency }}">{{ currency }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="submit" class="btn" value="Convert">
+        </form>
+        <div class="result" id="result">
+            <label for="convertedAmount">Result:</label>
+            {% if context.toCurrency == 'Choose currency' %}
+                <input value="Choose currency" id="convertedAmount" name="convertedAmount" readonly>
+            {% else %}
+                <input value="{{ context.res}} {{ context.toCurrency }}" id="convertedAmount" name="convertedAmount" readonly>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
